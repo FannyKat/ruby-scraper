@@ -23,6 +23,8 @@ ads_container = doc.css('.styles_AdsList__voa6p')
 if ads_container.any?
   annonces = ads_container.css('a[data-test-id="ad"]')
 
+  ad_data = []
+
   annonces.each_with_index do |annonce, index|
     relative_url = annonce['href']
     url = "http://leboncoin.fr#{relative_url}"
@@ -30,9 +32,25 @@ if ads_container.any?
     prix = annonce.css('span[data-qa-id="aditem_price"]').text
     thumb_url = thumb_urls[index]
 
+    ad_hash = {
+      "url" => url,
+      "titre" => titre,
+      "prix" => prix,
+      "img_url" => thumb_url
+    }
+
+    ad_data << ad_hash
+
     puts "Url: #{url}, Titre: #{titre}, Prix: #{prix}, Image URL: #{thumb_url}"
     puts "-------------------------"
   end
+
+# Save data to a JSON file
+  File.open('annonces.json', 'w') do |file|
+    file.write(JSON.pretty_generate(ad_data))
+  end
+
+  puts "Data saved to annonces.json"
 else
   puts "Balise d'annonces introuvable."
 end
