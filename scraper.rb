@@ -13,7 +13,10 @@ html = driver.page_source
 
 doc = Nokogiri::HTML(html)
 
-thumb_urls = html.scan(/"thumb_url":"([^"]+)"/).map { |match| match[0] }
+# Retrieve images url based on size
+
+image_urls = html.scan(/"urls":\s*\[([^\]]*rule=ad-image[^\]]*)\]/).flatten
+#thumb_urls = html.scan(/"thumb_url":"([^"]+)"/)
 
 driver.quit
 
@@ -30,18 +33,19 @@ if ads_container.any?
     url = "http://leboncoin.fr#{relative_url}"
     titre = annonce.css('p[data-qa-id="aditem_title"]').text
     prix = annonce.css('span[data-qa-id="aditem_price"]').text
-    thumb_url = thumb_urls[index]
+    #thumb_url = thumb_urls[index]
+    first_img_url = image_urls[index].split(",")[0].gsub('"', '')
 
     ad_hash = {
       "url" => url,
       "titre" => titre,
       "prix" => prix,
-      "img_url" => thumb_url
+      "img_url" => first_img_url
     }
 
     ad_data << ad_hash
 
-    puts "Url: #{url}, Titre: #{titre}, Prix: #{prix}, Image URL: #{thumb_url}"
+    puts "Url: #{url}, Titre: #{titre}, Prix: #{prix}, Image URL: #{first_img_url}"
     puts "-------------------------"
   end
 

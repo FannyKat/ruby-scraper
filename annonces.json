@@ -1,0 +1,20 @@
+[
+  {
+    "url": "http://leboncoin.fr/offre/voitures/2438662708",
+    "titre": "Volkswagen Golf R32 DSG 5p",
+    "prix": "15 990 €",
+    "img_url": "https://img.leboncoin.fr/api/v1/lbcpb1/images/12/e0/3a/12e03a4da5aac1970f2ab93ad313ff2d813a308a.jpg?rule=ad-image"
+  },
+  {
+    "url": "http://leboncoin.fr/offre/voitures/2436749979",
+    "titre": "Mercedes Classe A200 AMG DCT7 Pack AERO ( Classe A W 177 )",
+    "prix": "26 990 €",
+    "img_url": "https://img.leboncoin.fr/api/v1/lbcpb1/images/4b/c2/44/4bc244eae13fdca7ced2c18cc9e67bc8bc33900a.jpg?rule=ad-image"
+  },
+  {
+    "url": "http://leboncoin.fr/offre/voitures/2420648985",
+    "titre": "BMW X5 ( F15 ) Sdrive 25d 231ch Pack M 7 Places",
+    "prix": "39 990 €",
+    "img_url": "https://img.leboncoin.fr/api/v1/lbcpb1/images/a1/d1/d8/a1d1d8a59e12bdf6c90bb068af67621c357a5616.jpg?rule=ad-image"
+  }
+]
