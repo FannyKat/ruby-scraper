@@ -1,4 +1,4 @@
-import { fetchAds } from "backend/fetchAds"; 
+import { fetchAds } from "backend/fetchAds";
 
 $w.onReady(function () {
 	leboncoinAds()
@@ -9,13 +9,16 @@ export function leboncoinAds(event) {
 
 	fetchAds()
 		.then((json) => {
-			console.log(json);
-			
 			myGallery.items = json.map(item => {
 			return {
 				"src": item.img_url,
-				"description": `${item.titre} - ${item.prix}`,
+				"title": item.titre,
+				"description": item.prix,
+				"link": item.url
 			};
 			});
-	});
+		})
+		.catch(error => {
+				console.error("Error fetching ads:", error);
+			});
 }
