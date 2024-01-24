@@ -21,8 +21,9 @@ image_urls = html.scan(/"urls":\s*\[([^\]]*rule=ad-image[^\]]*)\]/).flatten
 driver.quit
 
 # Get div cars ads of html document
-ads_container = doc.css('.styles_AdsList__voa6p')
-
+#ads_container = doc.css('.styles_AdsList__pN4Wm')
+ads_container = doc.css('div[class*="styles_AdsList__"][data-qa-id="ads-container"]')
+puts doc
 if ads_container.any?
   annonces = ads_container.css('a[data-test-id="ad"]')
 
