@@ -3,27 +3,30 @@ require 'nokogiri'
 
 url = 'https://www.leboncoin.fr/boutique/3551909/yt_motors.htm'
 
-driver = Selenium::WebDriver.for :chrome
+options = Selenium::WebDriver::Chrome::Options.new
+
+options.add_argument('--disable-blink-features=AutomationControlled')
+
+driver = Selenium::WebDriver.for :chrome, options: options
+
 driver.get(url)
 
-wait = Selenium::WebDriver::Wait.new(timeout: 10)
-wait.until { driver.execute_script('return document.readyState') == 'complete' }
+#wait = Selenium::WebDriver::Wait.new(timeout: 10)
+#wait.until { driver.execute_script('return document.readyState') == 'complete' }
 
 html = driver.page_source
 
 doc = Nokogiri::HTML(html)
 
 # Retrieve images url based on size
-
 image_urls = html.scan(/"urls":\s*\[([^\]]*rule=ad-image[^\]]*)\]/).flatten
 #thumb_urls = html.scan(/"thumb_url":"([^"]+)"/)
 
 driver.quit
 
 # Get div cars ads of html document
-#ads_container = doc.css('.styles_AdsList__pN4Wm')
 ads_container = doc.css('div[class*="styles_AdsList__"][data-qa-id="ads-container"]')
-puts doc
+
 if ads_container.any?
   annonces = ads_container.css('a[data-test-id="ad"]')
 
